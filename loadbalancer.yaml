@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-service #Use only lowercase alphabets with or without '-'
+spec:
+  ports:
+    #Here we don't have to specify the nodeport it's automatically assigned.
+  - port: 8090 #internal frontend port.
+    targetPort: vproapp-port #This should match that container's exposed port where the traffic needs to routed to. Container port(Which will mapped by internal backend port of the service)
+    protocol: TCP #Captilize mandatory
+  selector: 
+    app: vproapp #This should match to that specific pod's label where the traffic should be routed to.
+  type: LoadBalancer  
+
