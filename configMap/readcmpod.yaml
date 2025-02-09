@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-demo-pod
+spec:
+  containers:
+    - name: demo
+      image: alpine
+      command: ["sleep", "3600"]
+      env:
+        - name: player_initial_lives #This is nothing but a variable within the container to which the bavalue is stored by reading the config map. It can be different from the variable in the config map to which it is referred to.
+          valueFrom:
+            configMapKeyRef: #Access method -> configMapKeyRef
+              name: game-demo #This is the name of the config map(Not the configmap's file name).
+              key: player_initial_lives #Key from the config map.
+        - name: ui_properties_file_name
+          valueFrom:
+            configMapKeyRef:
+              name: game-demo
+              key: ui_properties_file_name
+      volumeMounts:
+        - name: config #Name of the volume which needs to be mounted to the container.
+          mountPath: "/config" #Mount path within the container.
+          readOnly: true #So that the container cannot write anything into the mounted volume.
+  volumes:
+    - name: config
+      configMap:
+        name: game-demo #Provide the correct name of the config map which needs to be mounted, not it's file name!.
+        # An array of keys from the configmap(This can helps inject only the necessary keys but not all)
+        items:
+          - key: "game.properties" #Key name in the config file
+            path: "game.properties" #Since this key has a multiline value, it is stored in this specific file name.
+          - key: "user-interface.properties"
+            path: "user-interface.properties"

@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testpod
+  labels:
+    environment: testing
+    app: testapp
+spec:
+  containers:
+    - name: testcontainer
+      image: imranvisualpath/freshtomapp:v7
+      ports:
+        - name: testport1
+          containerPort: 8080

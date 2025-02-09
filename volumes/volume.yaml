@@ -1,0 +1,18 @@
+#Be very carefull with the spellings and indentations.
+
+apiVersion: v1 #In general this is a POD creation.
+kind: Pod #Always starts with captial letter
+metadata:
+  name: test-pod #Pod's name
+spec:
+  containers:
+  - image: mysql:5.7
+    name: test-container #The name of the container within the pod.
+    volumeMounts:
+    - mountPath: /var/lib/mysql #Path where the volumes has to mounted with the conatiner.
+      name: test-volume #The volume's name which needs to be mounted with the container.
+  volumes:
+  - name: test-volume #Defining a volume's name.
+    hostPath:
+      path: ./path 
+      type: DirectoryOrCreate #Creates the directory if not available.
