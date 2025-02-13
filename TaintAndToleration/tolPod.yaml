@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: student
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+  tolerations:
+    - key: "department"
+      operator: "Equal" #Must start with caps
+      value: "computerScience"
+      effect: "NoSchedule" #Must start with caps
+# Typically this toleration allows creation of this pod to the node which has this toleration if necessary.
+# If not the toleration is specified in here, then this pod will never run on the node with the "department=computerScience:NoSchedule".

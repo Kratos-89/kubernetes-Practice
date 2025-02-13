@@ -4,13 +4,13 @@ metadata:
   name: ingress-demo
 spec:
   rules:
-  - host: "foo.demo.com"
-    http:
-      paths:
-      - pathType: Prefix #Other type is excat(To provide exact path)
-        path: "/demo" #Specify the path if present.
-        backend:
-          service:
-            name: app-service #Name of the service that handles the pods of the application.
-            port:
-              number: 80 #Port on which the service is listening to?.
+    - host: "foo.demo.com"
+      http:
+        paths:
+          - pathType: Prefix #Other type is excat(To provide exact path)
+            path: "/demo" #Specify the path if present.
+            backend:
+              service:
+                name: app-service #Name of the service that handles the pods of the application.
+                port:
+                  number: 80 #Port on which the service is listening to?.
