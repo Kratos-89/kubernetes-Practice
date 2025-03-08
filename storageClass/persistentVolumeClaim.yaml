@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-pv-claim
+  labels:
+    type: local
+spec:
+  storageClassName: standard #For cloud storage provisioning
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi #claiming 500MB out of 1GB Persistent Volume

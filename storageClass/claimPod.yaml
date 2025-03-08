@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pv-claim-pod
+  labels:
+    type: local
+spec:
+  volumes:
+    - name: pod-volume #Here we are actually creating a volume from the claim we made(500MB persistentVoumeClaim)
+      persistentVolumeClaim:
+        claimName: local-pv-claim
+  containers:
+    - name: pvclaimcontainer
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-port"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html/"
+          name: pod-volume #Attaching the created volume

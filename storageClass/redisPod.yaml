@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-pod
+spec:
+  containers:
+    - image: redis
+      name: redis
+      volumeMounts:
+        - name: redis-storage
+          mountPath: /data/redis #Path inside the container
+  volumes:
+    - name: redis-storage
+      emptyDir: {} #A local path inside the node where the container runs inside a pod.
